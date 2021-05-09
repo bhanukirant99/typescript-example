@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./Style.css";
+import { useReducer } from "react";
+import { counterReducer } from "./counterReducer";
+import { Header, Control } from "./Components";
+import { CounterType } from "./counter.types";
+
+const initialState: CounterType = {
+  count: 0,
+  status: "Begin",
+};
 
 function App() {
+  const [state, dispatch] = useReducer(counterReducer, initialState);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header state={state} />
+      <Control state={state} dispatch={dispatch} />
     </div>
   );
 }
